@@ -1,0 +1,48 @@
+services:
+  msr:
+    image: ${WZP_MSR_CONTAINER_IMAGE}:${WZP_MSR_CONTAINER_TAG}
+    hostname: wzp-jcode
+    volumes:
+      # Our Code
+      - ../../01-code/is-packages/WxAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssert/
+      - ../../01-code/is-packages/WxAssertTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssertTest/
+      - ../../01-code/is-packages/WxIsDevTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevTools/
+      - ../../01-code/is-packages/WxIsDevToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevToolsLocalTest/
+      - ../../01-code/is-packages/WxIsTestTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestTools/
+      - ../../01-code/is-packages/WxIsTestToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestToolsLocalTest/
+      - ../../01-code/is-packages/WxSimpleConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfig/
+      - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
+      - ../../01-code/is-packages/WxTestDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WxTestDataGen/
+      - ../../01-code/is-packages/WzAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/WzAdvanced/
+      - ../../01-code/is-packages/WzAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssert/
+      - ../../01-code/is-packages/WzAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertLocalTest/
+      - ../../01-code/is-packages/WzAssertManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertManualTest/
+      - ../../01-code/is-packages/WzDWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/WzDWrappers/
+      - ../../01-code/is-packages/WzLog/:${WZP_GUEST_PACKAGES_FOLDER}/WzLog/
+      - ../../01-code/is-packages/WzLogManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzLogManualTest/
+      - ../../01-code/is-packages/WzPAdvancedUtils/:${WZP_GUEST_PACKAGES_FOLDER}/WzPAdvancedUtils/
+      - ../../01-code/is-packages/WzPAdvancedUtilsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPAdvancedUtilsLocalTest/
+      - ../../01-code/is-packages/WzPDeclarativeConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WzPDeclarativeConfig/
+      - ../../01-code/is-packages/WzPDeclarativeConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPDeclarativeConfigLocalTest/
+      - ../../01-code/is-packages/WzPUtil/:${WZP_GUEST_PACKAGES_FOLDER}/WzPUtil/
+      - ../../01-code/is-packages/WzPUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPUtilLocalTest/
+      - ../../01-code/is-packages/WzTAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WzTAssert/
+      - ../../01-code/is-packages/WzTAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTAssertLocalTest/
+      - ../../01-code/is-packages/WzTDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WzTDataGen/
+      - ../../01-code/is-packages/WzTestManager/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManager/
+      - ../../01-code/is-packages/WzTestManagerManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManagerManualTest/
+      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
+      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
+      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
+      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
+      - ../../01-code/is-packages/WzTTools/:${WZP_GUEST_PACKAGES_FOLDER}/WzTTools/
+      - ../../01-code/is-packages/WzTToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTToolsLocalTest/
+      - ../../01-code/is-packages/WzUtil/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtil/
+      - ../../01-code/is-packages/WzUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilLocalTest/
+      - ../../01-code/is-packages/WzUtilManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilManualTest/
+
+      # scripts
+      - ./scripts/:/mnt/scripts/
+    environment:
+      - WZP_GUEST_IS_HOME
+    entrypoint: /mnt/scripts/entrypoint.sh

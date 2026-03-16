@@ -1,0 +1,76 @@
+services:
+  msr:
+    image: ${WZP_DEV_CONTAINER_IMAGE}:${WZP_DEV_CONTAINER_TAG}
+    container_name: 2l-wzdev1
+    hostname: 2l-wzdev1
+    volumes:
+      ## MSR License
+      # - ${WZP_HOST_MSR_LICENSE_FILE_LOCATION}:${WZP_GUEST_MOUNT_POINT_LICENSE_FILE}
+      ## MSR properties
+      - ./config/MSR/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
+      # Our Code
+      - ../../01-code/is-packages/WxAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssert/
+      - ../../01-code/is-packages/WxAssertTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssertTest/
+      - ../../01-code/is-packages/WxIsDevTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevTools/
+      - ../../01-code/is-packages/WxIsDevToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevToolsLocalTest/
+      - ../../01-code/is-packages/WxIsTestTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestTools/
+      - ../../01-code/is-packages/WxIsTestToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestToolsLocalTest/
+      - ../../01-code/is-packages/WxSimpleConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfig/
+      - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
+      - ../../01-code/is-packages/WxTestDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WxTestDataGen/
+      - ../../01-code/is-packages/WzAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/WzAdvanced/
+      - ../../01-code/is-packages/WzAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssert/
+      - ../../01-code/is-packages/WzAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertLocalTest/
+      - ../../01-code/is-packages/WzAssertManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertManualTest/
+      - ../../01-code/is-packages/WzDWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/WzDWrappers/
+      - ../../01-code/is-packages/WzLog/:${WZP_GUEST_PACKAGES_FOLDER}/WzLog/
+      - ../../01-code/is-packages/WzLogManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzLogManualTest/
+      - ../../01-code/is-packages/WzPAdvancedUtils/:${WZP_GUEST_PACKAGES_FOLDER}/WzPAdvancedUtils/
+      - ../../01-code/is-packages/WzPAdvancedUtilsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPAdvancedUtilsLocalTest/
+      - ../../01-code/is-packages/WzPDeclarativeConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WzPDeclarativeConfig/
+      - ../../01-code/is-packages/WzPDeclarativeConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPDeclarativeConfigLocalTest/
+      - ../../01-code/is-packages/WzPUtil/:${WZP_GUEST_PACKAGES_FOLDER}/WzPUtil/
+      - ../../01-code/is-packages/WzPUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzPUtilLocalTest/
+      - ../../01-code/is-packages/WzTAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WzTAssert/
+      - ../../01-code/is-packages/WzTAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTAssertLocalTest/
+      - ../../01-code/is-packages/WzTDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WzTDataGen/
+      - ../../01-code/is-packages/WzTestManager/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManager/
+      - ../../01-code/is-packages/WzTestManagerManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManagerManualTest/
+      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
+      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
+      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
+      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
+      - ../../01-code/is-packages/WzTTools/:${WZP_GUEST_PACKAGES_FOLDER}/WzTTools/
+      - ../../01-code/is-packages/WzTToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTToolsLocalTest/
+      - ../../01-code/is-packages/WzUtil/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtil/
+      - ../../01-code/is-packages/WzUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilLocalTest/
+      - ../../01-code/is-packages/WzUtilManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilManualTest/
+      # Temp
+      - ../../01-code/is-packages/WzTemp/:${WZP_GUEST_PACKAGES_FOLDER}/WzTemp/
+    environment:
+      # TODO: check SAG_ variable names after IBM's acquisition
+      # - SAG_IS_LICENSE_FILE=${WZP_GUEST_MOUNT_POINT_LICENSE_FILE}
+      - SAG_IS_CONFIG_PROPERTIES=${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
+    ports:
+      - ${WZP_PORT_PREFIX}55:5555
+    depends_on:
+      um:
+        condition: service_healthy
+  um:
+    image: ${WZP_DEV_UM_CONTAINER_IMAGE}:${WZP_DEV_UM_CONTAINER_TAG}
+    container_name: 2l-wzdev1-um
+    hostname: 2l-wzdev1-um
+    volumes:
+      - um_data:${WZP_GUEST_MOUNT_POINT_UM_REALM_DATA}
+      - ./config/UM/Licence/:${WZP_GUEST_MOUNT_POINT_UM_REALM_LICENSE_FOLDER}
+      - um_logs:${WZP_GUEST_MOUNT_POINT_UM_REALM_LOGS}
+      - um_users:${WZP_GUEST_MOUNT_POINT_UM_REALM_USERS}
+    ports:
+      - ${WZP_PORT_PREFIX}90:9000
+    environment:
+      - REALM_NAME=wzdev01
+
+volumes:
+  um_data: {}
+  um_logs: {}
+  um_users: {}

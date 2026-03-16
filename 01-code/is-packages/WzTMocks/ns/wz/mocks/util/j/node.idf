@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="shared">c3RhdGljIHByaXZhdGUgU3RyaW5nIGdldENydEhvc3ROYW1lKCl7CglTdHJpbmcgcyA9IG51bGw7
+Cgl0cnkgewoJCXMgPSBqYXZhLm5ldC5JbmV0QWRkcmVzcy5nZXRMb2NhbEhvc3QoKS5nZXRIb3N0
+TmFtZSgpOwoJfSBjYXRjaCAoVW5rbm93bkhvc3RFeGNlcHRpb24gZSkgewoJCS8vIFRPRE8gQXV0
+by1nZW5lcmF0ZWQgY2F0Y2ggYmxvY2sKCQllLnByaW50U3RhY2tUcmFjZSgpOwoJfQoJcmV0dXJu
+IHM7Cn0KCnN0YXRpYyBmaW5hbCBwcml2YXRlIFN0cmluZyBjcnRIb3N0TmFtZT1nZXRDcnRIb3N0
+TmFtZSgpOwo=</value>
+  <value name="encodeutf8">true</value>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.UnsupportedEncodingException</value>
+    <value>java.security.InvalidAlgorithmParameterException</value>
+    <value>java.security.InvalidKeyException</value>
+    <value>java.security.NoSuchAlgorithmException</value>
+    <value>java.security.spec.InvalidKeySpecException</value>
+    <value>java.security.spec.KeySpec</value>
+    <value>java.util.Base64</value>
+    <value>javax.crypto.spec.PBEKeySpec</value>
+    <value>javax.crypto.spec.SecretKeySpec</value>
+    <value>javax.crypto.BadPaddingException</value>
+    <value>javax.crypto.Cipher</value>
+    <value>javax.crypto.IllegalBlockSizeException</value>
+    <value>javax.crypto.NoSuchPaddingException</value>
+    <value>javax.crypto.SecretKey</value>
+    <value>javax.crypto.SecretKeyFactory</value>
+    <value>javax.crypto.spec.IvParameterSpec</value>
+    <value>java.security.SecureRandom</value>
+    <value>java.time.Instant</value>
+    <value>java.util.Enumeration</value>
+    <value>java.util.Map</value>
+    <value>java.net.NetworkInterface</value>
+    <value>java.net.UnknownHostException</value>
+    <value>java.nio.ByteBuffer</value>
+  </array>
+</Values>
