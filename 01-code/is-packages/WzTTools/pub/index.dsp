@@ -5,13 +5,13 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/WxISUtilities/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/WzTTools/css/base.css" />
 <title>Test Utilities Package</title>
 </head>
 
 <body>
 
-<h1>Welcome to the Home Page for the WzTestTools Package.</h1>
+<h1>Welcome to the Home Page for the WzTTools Package.</h1>
 
 </body>
 </html>
