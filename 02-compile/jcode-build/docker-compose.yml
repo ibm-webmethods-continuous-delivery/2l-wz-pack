@@ -6,8 +6,6 @@ services:
       # Our Code
       - ../../01-code/is-packages/WxIsDevTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevTools/
       - ../../01-code/is-packages/WxIsDevToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevToolsLocalTest/
-      - ../../01-code/is-packages/WxIsTestTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestTools/
-      - ../../01-code/is-packages/WxIsTestToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestToolsLocalTest/
       - ../../01-code/is-packages/WxSimpleConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfig/
       - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
       - ../../01-code/is-packages/WzAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/WzAdvanced/
