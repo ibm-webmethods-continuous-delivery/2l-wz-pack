@@ -113,22 +113,6 @@ public final class j
 
 
 
-	public static final void getNullObject (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(getNullObject)>> ---
-		// @sigtype java 3.5
-		// [o] object:0:required nullObject
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		IDataUtil.put( pipelineCursor, "nullObject", null );
-		pipelineCursor.destroy();
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
 	public static final void probabilityException (IData pipeline)
         throws ServiceException
 	{

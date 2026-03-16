@@ -38,21 +38,5 @@ public final class DataGen
 
                 
 	}
-
-
-
-	public static final void getNull (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(getNull)>> ---
-		// @sigtype java 3.5
-		// [o] object:0:required nullObject
-		final IDataCursor pipelineCursor = pipeline.getCursor();
-		IDataUtil.put( pipelineCursor, "nullObject", null );
-		pipelineCursor.destroy();
-		// --- <<IS-END>> ---
-
-                
-	}
 }
 

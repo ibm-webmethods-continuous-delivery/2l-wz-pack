@@ -10,7 +10,6 @@ services:
       - ../../01-code/is-packages/WxIsTestToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestToolsLocalTest/
       - ../../01-code/is-packages/WxSimpleConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfig/
       - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
-      - ../../01-code/is-packages/WxTestDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WxTestDataGen/
       - ../../01-code/is-packages/WzAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/WzAdvanced/
       - ../../01-code/is-packages/WzDWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/WzDWrappers/
       - ../../01-code/is-packages/WzLog/:${WZP_GUEST_PACKAGES_FOLDER}/WzLog/
