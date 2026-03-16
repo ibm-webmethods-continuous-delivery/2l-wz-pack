@@ -9,8 +9,6 @@ services:
       ## MSR properties
       - ./config/MSR/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
       # Our Code
-      - ../../01-code/is-packages/WxAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssert/
-      - ../../01-code/is-packages/WxAssertTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxAssertTest/
       - ../../01-code/is-packages/WxIsDevTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevTools/
       - ../../01-code/is-packages/WxIsDevToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsDevToolsLocalTest/
       - ../../01-code/is-packages/WxIsTestTools/:${WZP_GUEST_PACKAGES_FOLDER}/WxIsTestTools/
@@ -19,9 +17,6 @@ services:
       - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
       - ../../01-code/is-packages/WxTestDataGen/:${WZP_GUEST_PACKAGES_FOLDER}/WxTestDataGen/
       - ../../01-code/is-packages/WzAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/WzAdvanced/
-      - ../../01-code/is-packages/WzAssert/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssert/
-      - ../../01-code/is-packages/WzAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertLocalTest/
-      - ../../01-code/is-packages/WzAssertManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzAssertManualTest/
       - ../../01-code/is-packages/WzDWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/WzDWrappers/
       - ../../01-code/is-packages/WzLog/:${WZP_GUEST_PACKAGES_FOLDER}/WzLog/
       - ../../01-code/is-packages/WzLogManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzLogManualTest/
