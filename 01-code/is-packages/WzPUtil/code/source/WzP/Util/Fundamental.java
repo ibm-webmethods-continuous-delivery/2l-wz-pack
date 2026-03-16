@@ -1,4 +1,4 @@
-package wz.utilities;
+package WzP.Util;
 
 // -----( IS Java Code Template v1.2
 
@@ -9,16 +9,16 @@ import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 // --- <<IS-END-IMPORTS>> ---
 
-public final class fundamental
+public final class Fundamental
 
 {
 	// ---( internal utility methods )---
 
-	final static fundamental _instance = new fundamental();
+	final static Fundamental _instance = new Fundamental();
 
-	static fundamental _newInstance() { return new fundamental(); }
+	static Fundamental _newInstance() { return new Fundamental(); }
 
-	static fundamental _cast(Object o) { return (fundamental)o; }
+	static Fundamental _cast(Object o) { return (Fundamental)o; }
 
 	// ---( server methods )---
 

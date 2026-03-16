@@ -32,10 +32,6 @@ services:
       - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
       - ../../01-code/is-packages/WzTTools/:${WZP_GUEST_PACKAGES_FOLDER}/WzTTools/
       - ../../01-code/is-packages/WzTToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTToolsLocalTest/
-      - ../../01-code/is-packages/WzUtil/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtil/
-      - ../../01-code/is-packages/WzUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilLocalTest/
-      - ../../01-code/is-packages/WzUtilManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzUtilManualTest/
-
       # scripts
       - ./scripts/:/mnt/scripts/
     environment:
