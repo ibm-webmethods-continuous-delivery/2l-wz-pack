@@ -243,7 +243,7 @@
 </MAPDELETE>
 </MAP>
 
-<INVOKE TIMEOUT="" SERVICE="WzP.Util.Fundamental:getNull" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+<INVOKE TIMEOUT="" SERVICE="zz.util.misc:getNull" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT></COMMENT>
 
   <!-- nodes -->
