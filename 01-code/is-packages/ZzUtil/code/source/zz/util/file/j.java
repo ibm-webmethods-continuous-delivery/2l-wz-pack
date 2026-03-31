@@ -1,4 +1,4 @@
-package wx.simpleConfig.util.file;
+package zz.util.file;
 
 // -----( IS Java Code Template v1.2
 

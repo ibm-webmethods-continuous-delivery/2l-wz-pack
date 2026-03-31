@@ -48,41 +48,6 @@ public final class j
 
 
 
-	public static final void booleanToString (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(booleanToString)>> ---
-		// @sigtype java 3.5
-		// [i] object:0:optional bJava
-		// [o] field:0:optional bString
-		// pipeline
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		boolean bPresent = false;
-		String bString = null;
-		Object bJava = null;
-		if (bPresent = pipelineCursor.first("bJava")) {
-			bJava = IDataUtil.get(pipelineCursor, "bJava");
-		}
-		pipelineCursor.destroy();
-		
-		// pipeline
-		if (bPresent) {
-			if (null != bJava)
-				if (bJava instanceof java.lang.Boolean)
-					bString = bJava.toString();
-				else
-					throw new ServiceException("Received object is not a java.lang.Boolean!");
-			IDataCursor pipelineCursor_1 = pipeline.getCursor();
-			IDataUtil.put(pipelineCursor_1, "bString", bString);
-			pipelineCursor_1.destroy();
-		}
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
 	public static final void decryptPassword (IData pipeline)
         throws ServiceException
 	{
@@ -441,40 +406,6 @@ public final class j
 		IDataUtil.put( pipelineCursor, "saltBytes", LongToBytes(hash) );
 		IDataUtil.put( pipelineCursor, "saltLong", new Long(hash) );
 		pipelineCursor.destroy();
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
-	public static final void stringToInteger (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(stringToInteger)>> ---
-		// @sigtype java 3.5
-		// [i] field:0:optional integerString
-		// [o] object:0:optional integerObject
-		String	integerString = null;
-		boolean present = false;
-		Integer iObj = null;
-		
-		// pipeline
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		present=pipelineCursor.first("integerString");
-		if (present)
-		{
-			integerString = (String) pipelineCursor.getValue();
-			if (null != integerString)
-				iObj = Integer.parseInt(integerString);
-		}
-		pipelineCursor.destroy();
-		
-		// pipeline
-		IDataCursor pipelineCursor_1 = pipeline.getCursor();
-		IDataUtil.put( pipelineCursor_1, "integerObject", iObj );
-		pipelineCursor_1.destroy();
-			
 		// --- <<IS-END>> ---
 
                 
