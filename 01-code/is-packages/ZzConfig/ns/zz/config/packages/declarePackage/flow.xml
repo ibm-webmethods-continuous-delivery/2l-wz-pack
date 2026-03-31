@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FLOW VERSION="3.0" CLEANUP="true">
+  <COMMENT></COMMENT>
 
   <!-- nodes -->
 
@@ -198,6 +199,7 @@
   <value name="xml">false</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">exists</value>
     <value name="field_type">string</value>
@@ -344,6 +346,7 @@
   <value name="xml">true</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">unknown</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">exists</value>
     <value name="field_type">string</value>
@@ -472,6 +475,7 @@
   <value name="xml">WxSimpleConfig - declarePackage</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">field</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">function</value>
     <value name="field_type">string</value>
@@ -492,6 +496,7 @@
   <value name="xml">Info</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">field</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">level</value>
     <value name="field_type">string</value>
@@ -521,6 +526,7 @@
   <value name="xml">Package %packageName% does not exist, creating with version 1.0</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">field</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">message</value>
     <value name="field_type">string</value>
@@ -943,6 +949,7 @@
   <value name="xml">false</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
     <value name="is_public">false</value>
     <value name="field_name">exists</value>
     <value name="field_type">string</value>

@@ -1,6 +1,10 @@
 services:
   msr:
-    image: ${WZP_DEV_CONTAINER_IMAGE}:${WZP_DEV_CONTAINER_TAG}
+    build:
+      context: ./build
+      args:
+        - __ibm_wm_msr_image=${WZP_DEV_CONTAINER_IMAGE}:${WZP_DEV_CONTAINER_TAG}
+    image: wz-dev
     container_name: 2l-wzdev1
     hostname: 2l-wzdev1
     volumes:
@@ -11,7 +15,6 @@ services:
       # Our Code, converted to Z convention
       - ../../01-code/is-packages/ZxTools/:${WZP_GUEST_PACKAGES_FOLDER}/ZxTools/
       - ../../01-code/is-packages/ZxToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZxToolsLocalTest/
-      - ../../01-code/is-packages/ZxWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/ZxWrappers/
       - ../../01-code/is-packages/ZyAssert/:${WZP_GUEST_PACKAGES_FOLDER}/ZyAssert/
       - ../../01-code/is-packages/ZyAssertLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZyAssertLocalTest/
       - ../../01-code/is-packages/ZzConfig/:${WZP_GUEST_PACKAGES_FOLDER}/ZzConfig/
@@ -20,6 +23,7 @@ services:
       - ../../01-code/is-packages/ZzUtilAdvanced/:${WZP_GUEST_PACKAGES_FOLDER}/ZzUtilAdvanced/
       - ../../01-code/is-packages/ZzUtilAdvancedLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzUtilAdvancedLocalTest/
       - ../../01-code/is-packages/ZzUtilLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzUtilLocalTest/
+      - ../../01-code/is-packages/ZzWrappers/:${WZP_GUEST_PACKAGES_FOLDER}/ZzWrappers/
       ## Still to convert
       - ../../01-code/is-packages/WxSimpleConfig/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfig/
       - ../../01-code/is-packages/WxSimpleConfigTest/:${WZP_GUEST_PACKAGES_FOLDER}/WxSimpleConfigTest/
@@ -29,8 +33,6 @@ services:
       - ../../01-code/is-packages/WzTestManager/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManager/
       - ../../01-code/is-packages/WzTestManagerManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManagerManualTest/
       - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
-      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
-      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
       - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
       - ../../01-code/is-packages/WzTTools/:${WZP_GUEST_PACKAGES_FOLDER}/WzTTools/
       - ../../01-code/is-packages/WzTToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTToolsLocalTest/
