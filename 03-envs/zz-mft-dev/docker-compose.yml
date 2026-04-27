@@ -1,0 +1,103 @@
+services:
+
+  #### MFT requires a database to work
+  db:
+    image: ${WZP_POSTGRES_IMAGE}
+    # Refer to https://docs.docker.com/guides/databases/
+    # about the docker-entrypoint-initdb.d directory
+    container_name: zz-mft-dev-01-db
+    volumes:
+      - ./scripts/init/postgres/create-dbs.sh:/docker-entrypoint-initdb.d/create-dbs.sh
+      - db-data:${WZP_POSTGRES_DATA_MOUNT_POINT}
+    environment:
+      - POSTGRES_USER=${WZP_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${WZP_POSTGRES_PASS}
+      - WZP_WM_DB_NAME
+      - WZP_WM_DB_USER_NAME
+      - WZP_WM_DB_USER_PASS
+      - WZP_WM_ARCHIVE_DB_NAME
+      - WZP_WM_ARCHIVE_DB_USER_NAME
+      - WZP_WM_ARCHIVE_DB_USER_PASS
+    networks:
+      n1:
+        aliases:
+          - db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+
+  # Database Must be initialized before MFT can start
+  dbc:
+    image: ${WZP_MFT_DCC_CONTAINER_IMAGE}:${WZP_MFT_DCC_CONTAINER_TAG}
+    volumes:
+      # Do not mount the logs folder when using the MFT OOTB image
+      # - dbc-logs:${WZP_DBC_LOGS_MOUNT_POINT}
+      - ./scripts/init/dbc/:${WZP_DBC_SCRIPTS_MOUNT_POINT}
+    networks:
+      - n1
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - WZP_DBC_WM_HOME
+      - WZP_POSTGRES_USER
+      - WZP_POSTGRES_PASS
+      - WZP_WM_DB_NAME
+      - WZP_WM_DB_USER_NAME
+      - WZP_WM_DB_USER_PASS
+      - WZP_WM_ARCHIVE_DB_NAME
+      - WZP_WM_ARCHIVE_DB_USER_NAME
+      - WZP_WM_ARCHIVE_DB_USER_PASS
+    env_file:
+      - dbc.env
+    entrypoint: ${WZP_DBC_SCRIPTS_MOUNT_POINT}/entrypoint.sh
+
+
+  mft:
+    build:
+      context: ./build
+      args:
+        - __ibm_wm_mft_image=${WZP_MFT_DEV_CONTAINER_IMAGE}:${WZP_MFT_DEV_CONTAINER_TAG}
+        - __at_vfs_folder=/mnt/our/vfs
+        - __at_injected_config_folder=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
+    image: wz-dev
+    container_name: 2l-zz-mft-dev-1
+    hostname: 2l-zz-mft-dev-1
+    volumes:
+      ## MSR properties
+      - ./config/MFT/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
+      - ./config/MFT/injected:${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
+      # Our Code, converted to Z convention
+      - ../../01-code/is-packages/ZzMftConfig/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfig/
+      - ../../01-code/is-packages/ZzMftConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfigLocalTest/
+      - logs:${WZP_GUEST_LOGS_FOLDER}
+      - ./config/MFT/injected:${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
+    environment:
+      # TODO: check SAG_ variable names after IBM's acquisition
+      # - SAG_IS_LICENSE_FILE=${WZP_GUEST_MOUNT_POINT_LICENSE_FILE}
+      - SAG_IS_CONFIG_PROPERTIES=${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
+      - ZZ_MFT_CONFIG_INJECTED_CONFIG_PATH=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
+      - IS_ADMIN_PWD
+    ports:
+      - ${WZP_PORT_PREFIX}55:5555
+      # Expected HTTP port for Web Client
+      - ${WZP_PORT_PREFIX}60:51060
+      # Expected HTTPS port for Web Client
+      - ${WZP_PORT_PREFIX}63:51063
+      # Expected HTTP port for sftp
+      - ${WZP_PORT_PREFIX}60:51022
+
+
+volumes:
+  logs:
+    name: zz-mft-dev-logs
+  db-data:
+    name: zz-mft-dev-db-data
+
+networks:
+  n1:
+    external: false
+    name: zz-mft-dev-n1
