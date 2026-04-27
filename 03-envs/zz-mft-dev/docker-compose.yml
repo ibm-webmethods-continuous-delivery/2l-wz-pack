@@ -5,7 +5,7 @@ services:
     image: ${WZP_POSTGRES_IMAGE}
     # Refer to https://docs.docker.com/guides/databases/
     # about the docker-entrypoint-initdb.d directory
-    container_name: zz-mft-dev-01-db
+    container_name: 2l-zz-mft-dev-01-db
     volumes:
       - ./scripts/init/postgres/create-dbs.sh:/docker-entrypoint-initdb.d/create-dbs.sh
       - db-data:${WZP_POSTGRES_DATA_MOUNT_POINT}
@@ -55,7 +55,6 @@ services:
       - dbc.env
     entrypoint: ${WZP_DBC_SCRIPTS_MOUNT_POINT}/entrypoint.sh
 
-
   mft:
     build:
       context: ./build
@@ -64,8 +63,8 @@ services:
         - __at_vfs_folder=/mnt/our/vfs
         - __at_injected_config_folder=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
     image: wz-dev
-    container_name: 2l-zz-mft-dev-1
-    hostname: 2l-zz-mft-dev-1
+    container_name: 2l-zz-mft-dev-01
+    hostname: 2l-zz-mft-dev-01
     volumes:
       ## MSR properties
       - ./config/MFT/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
@@ -81,15 +80,25 @@ services:
       - SAG_IS_CONFIG_PROPERTIES=${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
       - ZZ_MFT_CONFIG_INJECTED_CONFIG_PATH=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
       - IS_ADMIN_PWD
+      - WZP_WM_DB_NAME
+      - WZP_WM_DB_USER_NAME
+      - WZP_WM_DB_USER_PASS
+      - WZP_WM_ARCHIVE_DB_NAME
+      - WZP_WM_ARCHIVE_DB_USER_NAME
+      - WZP_WM_ARCHIVE_DB_USER_PASS
     ports:
       - ${WZP_PORT_PREFIX}55:5555
       # Expected HTTP port for Web Client
-      - ${WZP_PORT_PREFIX}60:51060
+      - ${WZP_PORT_PREFIX}40:51040
       # Expected HTTPS port for Web Client
-      - ${WZP_PORT_PREFIX}63:51063
+      - ${WZP_PORT_PREFIX}43:51043
       # Expected HTTP port for sftp
-      - ${WZP_PORT_PREFIX}60:51022
-
+      - ${WZP_PORT_PREFIX}22:51022
+    networks:
+      - n1
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   logs:
