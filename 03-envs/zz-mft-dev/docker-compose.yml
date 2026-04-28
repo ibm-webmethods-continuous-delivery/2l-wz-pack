@@ -94,7 +94,9 @@ services:
       - ./config/MFT/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
       - ./config/MFT/injected:${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
       - ./data/subjects/01-ft-test:${WZP_GUEST_INJECTED_CERTS_MOUNT_POINT}
-      # Our Code, converted to Z convention
+      # Support Package for pipeline captures
+      - ../../01-code/is-packages/ZxPipelineLogger/:${WZP_GUEST_PACKAGES_FOLDER}/ZxPipelineLogger/
+      # Our Code
       - ../../01-code/is-packages/ZzMftConfig/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfig/
       - ../../01-code/is-packages/ZzMftConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfigLocalTest/
       - logs:${WZP_GUEST_LOGS_FOLDER}

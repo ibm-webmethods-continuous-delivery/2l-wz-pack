@@ -4,11 +4,19 @@
   <value name="enabled">yes</value>
   <value name="system_package">no</value>
   <value name="version">1.0</value>
-  <null name="startup_services"/>
+  <record name="startup_services" javaclass="com.wm.util.Values">
+    <null name="zx.pipeline.logger:load"/>
+  </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>
   <null name="requires"/>
-  <null name="listACL"/>
+  <value name="listACL">Default</value>
   <value name="webappLoad">yes</value>
   <value name="reloadWithDependentPackage">yes</value>
+  <value name="name">ZxPipelineLogger</value>
+  <null name="build"/>
+  <null name="description"/>
+  <null name="created_date"/>
+  <null name="extendedProperties"/>
+  <null name="target_server_version"/>
 </Values>
