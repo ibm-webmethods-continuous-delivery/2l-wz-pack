@@ -14,7 +14,8 @@ ARG __img_user_name=sagadmin
 # ARG __img_grp_name=sagadmin
 
 ARG __at_vfs_folder=/mnt/our/vfs
-ARG __at_injected_config_folder=/mnt/config/injected
+ARG __at_injected_config_folder=/mnt/injected/config
+ARG __at_injected_certs_folder=/mnt/injected/certs
 
 # Mind var dependencies
 ARG __at_guest_is_home=/opt/softwareag/IntegrationServer/instances/default
@@ -32,6 +33,7 @@ COPY --from=at-zero \
 RUN mkdir -p \
       "${__at_cf_pck_lt_path}" \
       "${__at_cf_pck_path}" \
+      "${__at_injected_certs_folder}" \
       "${__at_injected_config_folder}" \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}" \
@@ -39,6 +41,7 @@ RUN mkdir -p \
     && chown -R ${__new_user_id}:0 \
       "${__at_cf_pck_lt_path}" \
       "${__at_cf_pck_path}" \
+      "${__at_injected_certs_folder}" \
       "${__at_injected_config_folder}" \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}" \
@@ -49,6 +52,7 @@ USER sagadmin
 VOLUME \
       "${__at_cf_pck_lt_path}" \
       "${__at_cf_pck_path}" \
+      "${__at_injected_certs_folder}" \
       "${__at_injected_config_folder}" \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}"

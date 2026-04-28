@@ -55,14 +55,38 @@ services:
       - dbc.env
     entrypoint: ${WZP_DBC_SCRIPTS_MOUNT_POINT}/entrypoint.sh
 
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Certificate Manager
+  # Generates server TLS certificates and client SSH key pairs before any
+  # other service starts.
+  # ═══════════════════════════════════════════════════════════════════════════
+  cert-manager:
+    image: iwcd-cert-manager-u:alpine
+    container_name: zz-mft-dev-cert-manager
+    volumes:
+      - ./data/subjects:/mnt/data/certmgr
+      - ./scripts/cert-manager-entrypoint.sh:/entrypoint.sh:ro
+      - cert-manager-home:/home/certmgr
+      - cert-manager-tmp:/tmp
+    read_only: true
+    environment:
+      # TEST_PK_SECRET is the harness-level passphrase used by all subjects.
+      # Each subject's set-env.sh resolves CRTMGR_PK_PASS from this variable,
+      # keeping per-subject scope while enabling fully unattended operation.
+      - TEST_PK_SECRET=${WZP_TEST_PK_SECRET}
+    command: ["/bin/sh", "/entrypoint.sh"]
+    networks:
+      - n1
+
   mft:
     build:
       context: ./build
       args:
         - __ibm_wm_mft_image=${WZP_MFT_DEV_CONTAINER_IMAGE}:${WZP_MFT_DEV_CONTAINER_TAG}
         - __at_vfs_folder=/mnt/our/vfs
+        - __at_injected_certs_folder=${WZP_GUEST_INJECTED_CERTS_MOUNT_POINT}
         - __at_injected_config_folder=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
-    image: wz-dev
+    image: wz-mft-dev-01
     container_name: 2l-zz-mft-dev-01
     hostname: 2l-zz-mft-dev-01
     volumes:
@@ -105,6 +129,10 @@ volumes:
     name: zz-mft-dev-logs
   db-data:
     name: zz-mft-dev-db-data
+  cert-manager-home:
+    name: zz-mft-dev-cert-manager-home
+  cert-manager-tmp:
+    name: zz-mft-dev-cert-manager-tmp
 
 networks:
   n1:

@@ -4,7 +4,7 @@ services:
       context: ./build
       args:
         - __ibm_wm_msr_image=${WZP_DEV_CONTAINER_IMAGE}:${WZP_DEV_CONTAINER_TAG}
-    image: wz-dev
+    image: wz-dev-01
     container_name: 2l-wzdev1
     hostname: 2l-wzdev1
     volumes:
