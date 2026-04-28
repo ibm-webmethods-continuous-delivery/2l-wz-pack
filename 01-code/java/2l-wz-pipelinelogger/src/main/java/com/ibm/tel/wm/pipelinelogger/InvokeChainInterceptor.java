@@ -156,9 +156,10 @@ public class InvokeChainInterceptor implements InvokeChainProcessor {
 
 	@Override
 	public void process(@SuppressWarnings("rawtypes") Iterator chain
-                      , BaseService svc, IData pipeline, ServiceStatus status) 
-                      throws ServerException {
-    if (!status.isTopService()) {
+                        , BaseService svc, IData pipeline, ServiceStatus status) 
+                        throws ServerException {
+
+    if (!Config.INSTANCE.getToggle() || !status.isTopService()) {
 			if (chain.hasNext()) {
 				((InvokeChainProcessor) chain.next()).process(chain, svc, pipeline, status);
 			}
@@ -170,28 +171,27 @@ public class InvokeChainInterceptor implements InvokeChainProcessor {
 		String serviceNS = svc.getNSName().getFullName();
     IData inboundPipeline = null;
     try{
-      inboundPipeline = IDataUtil.deepClone(pipeline);
+        inboundPipeline = IDataUtil.deepClone(pipeline);
     }catch(Throwable t){
-      System.err.print("xxYYzz ERROR caught" + t.getMessage());
+        System.err.print("xxYYzz ERROR caught" + t.getMessage());
     }
     
     try {
-      if (chain.hasNext()) {
-        ((InvokeChainProcessor) chain.next()).process(chain, svc, pipeline, status);
-      }
+        if (chain.hasNext()) {
+            ((InvokeChainProcessor) chain.next()).process(chain, svc, pipeline, status);
+        }
     } finally {
-      long duration = System.currentTimeMillis() - startTime;
+		long duration = System.currentTimeMillis() - startTime;
 
-    java.io.StringWriter sw = new java.io.StringWriter();
-    sw.write("Service call");
-    sw.write("\nService         : " + serviceNS);
-    sw.write("\nDuration millis : " + (System.currentTimeMillis() - startTime));
-    sw.write("\n== Input  Pipeline ==============================");
+		java.io.StringWriter sw = new java.io.StringWriter();
+		sw.write("Service call");
+		sw.write("\nService         : " + serviceNS);
+		sw.write("\nDuration millis : " + (System.currentTimeMillis() - startTime));
+		sw.write("\n== Input  Pipeline ==============================");
 		writeLogTrace("inputPipeline", inboundPipeline, 0, sw, true);
-    sw.write("\n== Output Pipeline ==============================");
+		sw.write("\n== Output Pipeline ==============================");
 		writeLogTrace("outputPipeline", pipeline, 0, sw, true);
-		final String traceText = sw.toString();
-      JournalLogger.logInfo(JournalLogger.LOG_EXCEPTION, JournalLogger.FAC_LICENSE_MGR, sw.toString());
+		JournalLogger.logInfo(JournalLogger.LOG_EXCEPTION, JournalLogger.FAC_LICENSE_MGR, sw.toString());
     }
 	}
 }

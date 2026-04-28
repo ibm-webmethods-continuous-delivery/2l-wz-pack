@@ -112,7 +112,7 @@
                         <fileset>
                             <directory>${env.2L_WZP_WORKSPACE}/01-code/is-packages/ZxPipelineLogger/code/jars/static</directory>
                             <includes>
-                                <include>2l-wz-dev-pack*.jar</include>
+                                <include>2l-wz*.jar</include>
                             </includes>
                         </fileset>
                     </filesets>
