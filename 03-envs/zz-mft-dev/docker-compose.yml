@@ -90,18 +90,19 @@ services:
     container_name: 2l-zz-mft-dev-01
     hostname: 2l-zz-mft-dev-01
     volumes:
-      ## MSR properties
+      ## MSR properties and config
       - ./config/MFT/application.properties:${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
       - ./config/MFT/injected:${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
+      - ./data/subjects/01-ft-test:${WZP_GUEST_INJECTED_CERTS_MOUNT_POINT}
       # Our Code, converted to Z convention
       - ../../01-code/is-packages/ZzMftConfig/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfig/
       - ../../01-code/is-packages/ZzMftConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfigLocalTest/
       - logs:${WZP_GUEST_LOGS_FOLDER}
-      - ./config/MFT/injected:${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
     environment:
       # TODO: check SAG_ variable names after IBM's acquisition
       # - SAG_IS_LICENSE_FILE=${WZP_GUEST_MOUNT_POINT_LICENSE_FILE}
       - SAG_IS_CONFIG_PROPERTIES=${WZP_GUEST_MOUNT_POINT_APPLICATION_PROPERTIES}
+      - ZZ_MFT_CONFIG_INJECTED_CERT_PATH=${WZP_GUEST_INJECTED_CERTS_MOUNT_POINT}
       - ZZ_MFT_CONFIG_INJECTED_CONFIG_PATH=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
       - IS_ADMIN_PWD
       - WZP_WM_DB_NAME

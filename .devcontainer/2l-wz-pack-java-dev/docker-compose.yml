@@ -1,0 +1,12 @@
+services:
+  2l-wzp-java-dev:
+    image: 2l-wzp-java-dev
+    container_name: 2l-wzp-java-dev
+    hostname: 2l-wzp-java-dev
+    build:
+      context: ./build
+      args:
+        - __workspace_home=${WORKSPACE_FOLDER}
+    volumes:
+      - ../../:/${WORKSPACE_FOLDER}/
+    command: [ sleep, infinity ]

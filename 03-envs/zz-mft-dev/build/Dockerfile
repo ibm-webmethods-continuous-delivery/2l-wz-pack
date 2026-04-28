@@ -11,7 +11,7 @@ ARG __new_user_id=1001
 ARG __new_user_id=1001
 ARG __img_user_name=sagadmin
 # It seems MFT comes with group root
-# ARG __img_grp_name=sagadmin
+ARG __img_grp_name=sagadmin
 
 ARG __at_vfs_folder=/mnt/our/vfs
 ARG __at_injected_config_folder=/mnt/injected/config
@@ -38,7 +38,8 @@ RUN mkdir -p \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}" \
     && usermod -u ${__new_user_id} ${__img_user_name} \
-    && chown -R ${__new_user_id}:0 \
+    && groupmod -g ${__new_grp_id} ${__img_grp_name} \
+    && chown -R ${__new_user_id}:${__img_grp_name} \
       "${__at_cf_pck_lt_path}" \
       "${__at_cf_pck_path}" \
       "${__at_injected_certs_folder}" \
