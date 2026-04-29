@@ -18,8 +18,9 @@ ARG __workspace_home=/work
 ARG __user_home=/home/${__uname}
 ARG __supplemental_cp_dir=/cp
 
-ENV 2L_WZP_USER_HOME=${__user_home} \
-    2L_WZP_WORKSPACE=${__workspace_home}
+ENV WZP_USER_HOME=${__user_home} \
+    WZP_WORKSPACE=${__workspace_home} \
+    WZP_IS_JARS_DIR=${__supplemental_cp_dir}
 
 RUN apk --no-cache add openjdk21 \
     && addgroup -g ${__gid} ${__gname} \
@@ -37,6 +38,8 @@ USER ${__uname}
 
 COPY --from=msr /opt/softwareag/common/lib/wm-isclient.jar "${__supplemental_cp_dir}"/
 COPY --from=msr /opt/softwareag/IntegrationServer/lib/wm-isserver.jar "${__supplemental_cp_dir}"/
+COPY --from=msr /opt/softwareag/IntegrationServer/lib/jars/jackson*.jar "${__supplemental_cp_dir}"/
+COPY --from=msr /opt/softwareag/common/lib/ext/jackson*.jar "${__supplemental_cp_dir}"/
 
 WORKDIR "${__workspace_home}"
 

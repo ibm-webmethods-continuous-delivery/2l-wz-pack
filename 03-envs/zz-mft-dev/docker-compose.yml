@@ -113,6 +113,8 @@ services:
       - WZP_WM_ARCHIVE_DB_NAME
       - WZP_WM_ARCHIVE_DB_USER_NAME
       - WZP_WM_ARCHIVE_DB_USER_PASS
+    env_file:
+      - ./mft.env
     ports:
       - ${WZP_PORT_PREFIX}55:5555
       # Expected HTTP port for Web Client

@@ -25,15 +25,21 @@ public final class logger
 
 
 
-	public static final void getToggle (IData pipeline)
+	public static final void getToggles (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(getToggle)>> ---
+		// --- <<IS-START(getToggles)>> ---
 		// @sigtype java 3.5
-		// [o] field:0:required bToggle
+		// [o] field:0:required bMasterToggle
+		// [o] field:0:required bVerboseToggle
+		// [o] field:0:required bSimpleJsonToggle
+		// [o] field:0:required bFullJsonToggle
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
-		IDataUtil.put( pipelineCursor, "bToggle", ""+com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.getToggle() );
+		IDataUtil.put( pipelineCursor, "bMasterToggle", ""+com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.getToggle() );
+		IDataUtil.put( pipelineCursor, "bVerboseToggle", ""+com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.isVerboseSerializerEnabled() );
+		IDataUtil.put( pipelineCursor, "bSimpleJsonToggle", ""+com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.isJsonSimpleSerializerEnabled() );
+		IDataUtil.put( pipelineCursor, "bFullJsonToggle", ""+com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.isJsonCompactSerializerEnabled() );
 		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
@@ -55,18 +61,91 @@ public final class logger
 
 
 
-	public static final void setToggle (IData pipeline)
+	public static final void setCompactJsonToggle (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(setToggle)>> ---
+		// --- <<IS-START(setCompactJsonToggle)>> ---
 		// @sigtype java 3.5
-		// [i] field:0:optional bToggle
+		// [i] field:0:optional bToggle {"true","TRUE"}
+		// 
+		
+		IDataCursor pipelineCursor = pipeline.getCursor();
+			String	bToggle = IDataUtil.getString( pipelineCursor, "bToggle" );
+		pipelineCursor.destroy();
+		
+		com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.setJsonCompactSerializerEnabled(
+				(bToggle != null && bToggle.equalsIgnoreCase("true"))
+				);
+		
 		// pipeline
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void setMasterToggle (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(setMasterToggle)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:optional bToggle {"true","TRUE"}
+		// 
+		
 		IDataCursor pipelineCursor = pipeline.getCursor();
 			String	bToggle = IDataUtil.getString( pipelineCursor, "bToggle" );
 		pipelineCursor.destroy();
 		
 		com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.setToggle(
+				(bToggle != null && bToggle.equalsIgnoreCase("true"))
+				);
+		
+		// pipeline
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void setSimpleJsonToggle (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(setSimpleJsonToggle)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:optional bToggle {"true","TRUE"}
+		// 
+		
+		IDataCursor pipelineCursor = pipeline.getCursor();
+			String	bToggle = IDataUtil.getString( pipelineCursor, "bToggle" );
+		pipelineCursor.destroy();
+		
+		com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.setJsonSimpleSerializerEnabled(
+				(bToggle != null && bToggle.equalsIgnoreCase("true"))
+				);
+		
+		// pipeline
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void setVerboseToggle (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(setVerboseToggle)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:optional bToggle {"true","TRUE"}
+		// 
+		
+		IDataCursor pipelineCursor = pipeline.getCursor();
+			String	bToggle = IDataUtil.getString( pipelineCursor, "bToggle" );
+		pipelineCursor.destroy();
+		
+		com.ibm.tel.wm.pipelinelogger.Config.INSTANCE.setVerboseSerializerEnabled(
 				(bToggle != null && bToggle.equalsIgnoreCase("true"))
 				);
 		
