@@ -11,7 +11,8 @@ ARG __new_user_id=1001
 ARG __new_user_id=1001
 ARG __img_user_name=sagadmin
 # It seems MFT comes with group root
-ARG __img_grp_name=sagadmin
+# ARG __img_grp_name=sagadmin
+ARG __img_grp_name=0
 
 ARG __at_vfs_folder=/mnt/our/vfs
 ARG __at_injected_config_folder=/mnt/injected/config
@@ -27,8 +28,8 @@ USER root
 
 ## Work around bug MAT-25094 - to remove when fixed
 COPY --from=at-zero \
-  /opt/softwareag/IntegrationServer/instances/default/packages/WmCDS/pub/assets/i18n/cds/en.json \
-  /opt/softwareag/IntegrationServer/instances/default/packages/WmCDS/pub/assets/i18n/cds/en.json
+  /opt/softwareag/IntegrationServer/instances/default/packages/WmCDS/pub/assets/ \
+  /opt/softwareag/IntegrationServer/instances/default/packages/WmCDS/pub/assets/
 
 RUN mkdir -p \
       "${__at_cf_pck_lt_path}" \
@@ -38,7 +39,6 @@ RUN mkdir -p \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}" \
     && usermod -u ${__new_user_id} ${__img_user_name} \
-    && groupmod -g ${__new_grp_id} ${__img_grp_name} \
     && chown -R ${__new_user_id}:${__img_grp_name} \
       "${__at_cf_pck_lt_path}" \
       "${__at_cf_pck_path}" \
@@ -47,6 +47,9 @@ RUN mkdir -p \
       "${__at_logs_folder}" \
       "${__at_vfs_folder}" \
       /opt/softwareag
+
+# cut, but root should not be used
+#    && groupmod -g ${__new_grp_id} ${__img_grp_name} \
 
 USER sagadmin
 
