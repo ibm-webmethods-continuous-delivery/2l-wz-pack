@@ -59,6 +59,36 @@ public final class util
 
 
 
+	public static final void mapBoolToString (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(mapBoolToString)>> ---
+		// @sigtype java 3.5
+		// [i] object:0:optional boolIn
+		// [o] field:0:optional boolOut
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		java.lang.Boolean	boolIn = null;
+		boolean bFound = pipelineCursor.first("boolIn");
+		if ( bFound ) boolIn = (java.lang.Boolean) pipelineCursor.getValue();
+		pipelineCursor.destroy();
+		
+		// pipeline
+		if ( bFound ){
+			IDataCursor pipelineCursor_1 = pipeline.getCursor();
+			if ( null == boolIn )
+				IDataUtil.put( pipelineCursor_1, "boolOut", null );
+			else
+				IDataUtil.put( pipelineCursor_1, "boolOut", ""+boolIn );
+			pipelineCursor_1.destroy();
+		}
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void readFileAsBytes (IData pipeline)
         throws ServiceException
 	{
