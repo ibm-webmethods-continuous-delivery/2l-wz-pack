@@ -1,0 +1,5 @@
+---- BEGIN SSH2 PUBLIC KEY ----
+Comment: "ed25519_test_fixture"
+AAAAC3NzaC1lZDI1NTE5AAAAII23MlehHvISSbI0sDokoQz6nBGXVkDLojnAiAhD
+ndHu
+---- END SSH2 PUBLIC KEY ----

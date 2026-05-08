@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">zz.config.mft.util</value>
+  <value name="node_pkg">ZzMftConfig</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared"></value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>com.wm.app.b2b.server.PackageManager</value>
+    <value>com.wm.app.b2b.server.cluster.CMException</value>
+    <value>com.wm.app.b2b.server.cluster.ClusterManager</value>
+    <value>com.wm.util.EncUtil</value>
+    <value>com.wm.app.log.impl.sc.LevelTranslator</value>
+    <value>com.wm.lang.flow.IDataWmPathProcessor</value>
+    <value>com.wm.util.JournalLogger</value>
+    <value>com.entrust.toolkit.util.ByteArray</value>
+    <value>java.io.BufferedReader</value>
+    <value>java.io.ByteArrayInputStream</value>
+    <value>java.io.ByteArrayOutputStream</value>
+    <value>java.io.File</value>
+    <value>java.io.FileInputStream</value>
+    <value>java.io.FileNotFoundException</value>
+    <value>java.io.FileOutputStream</value>
+    <value>java.io.FileWriter</value>
+    <value>java.io.IOException</value>
+    <value>java.io.ObjectInput</value>
+    <value>java.io.ObjectInputStream</value>
+    <value>java.io.ObjectOutput</value>
+    <value>java.io.ObjectOutputStream</value>
+    <value>java.text.NumberFormat</value>
+    <value>java.text.ParseException</value>
+    <value>java.text.SimpleDateFormat</value>
+    <value>java.util.Arrays</value>
+    <value>java.util.Calendar</value>
+    <value>java.util.Date</value>
+    <value>java.util.Random</value>
+    <value>java.lang.reflect.*</value>
+    <value>java.net.UnknownHostException</value>
+    <value>java.nio.file.Files</value>
+    <value>java.nio.file.Paths</value>
+    <value>java.text.DateFormat</value>
+    <value>java.util.*</value>
+  </array>
+</Values>
