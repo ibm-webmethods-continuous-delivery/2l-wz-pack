@@ -239,10 +239,10 @@ public class VerboseSerializer implements PipelineSerializer {
                 out.write(INDENT_SPACE);
                 for (int t = 0; t < indent; t++)
                     out.write(INDENT_SPACE);
-                out.write("{" + val.getClass().getCanonicalName() + "} <instanceof java.util.Date>" + key + " = ");
+                out.write("{" + val.getClass().getCanonicalName() + "} <instanceof java.util.Date> " + key + " = ");
                 out.write(((java.util.Date) val).toInstant().toString());
             } else if (val instanceof String[][]) {
-                writeKeyPart("<instanceof String[][]>", key, indent, out, true);
+                writeKeyPart("<instanceof String[][]> ", key, indent, out, true);
                 String[][] st = (String[][]) val;
                 for (int k = 0; k < st.length; k++) {
                     for (int j = 0; j < st[0].length; j++) {
@@ -271,7 +271,7 @@ public class VerboseSerializer implements PipelineSerializer {
                     out.write("[" + k + "] = " + sa[k]);
                 }
             } else if (val instanceof IData[][]) {
-                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<instanceof IData[][]>"+key, indent, out, true);
+                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<instanceof IData[][]> "+key, indent, out, true);
                 IData[][] st = (IData[][]) val;
                 for (int k = 0; k < st.length; k++) {
                     for (int j = 0; j < st[0].length; j++) {
@@ -279,14 +279,14 @@ public class VerboseSerializer implements PipelineSerializer {
                     }
                 }
             } else if (val instanceof IData[]) {
-                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<instanceof IData[]>"+key, indent, out, true);
+                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<instanceof IData[]> "+key, indent, out, true);
 
                 IData[] ida = (IData[]) val;
                 for (int l = 0; l < ida.length; l++) {
                     writeLogTrace("[" + l + "]->{" + ida[l].getClass().getCanonicalName()+"}", ida[l], indent + 2, out, false);
                 }
             } else if (val instanceof IData) {
-                writeLogTrace("<instanceof IData>"+key, val, indent + 1, out, false);
+                writeLogTrace("<instanceof IData> "+key, val, indent + 1, out, false);
             } else if (val instanceof com.wm.util.coder.IDataCodable[]) {
                     out.write("\n");
                     out.write(INDENT_SPACE);
@@ -302,7 +302,7 @@ public class VerboseSerializer implements PipelineSerializer {
                 writeKeyPart("<instanceof byte[]>", key, indent, out, true);
                 out.write(" = *");
             } else if (val.getClass().isArray()) {
-                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<isArray()>"+key, indent, out, true);
+                writeKeyPart("{"+val.getClass().getCanonicalName()+"}", "<isArray()> "+key, indent, out, true);
                 Object[] oa = (Object[]) val;
                 for (int k = 0; k < oa.length; k++) {
                     out.write("\n");
@@ -327,7 +327,7 @@ public class VerboseSerializer implements PipelineSerializer {
                     out.write(INDENT_SPACE);
                 if (isPasswordField(key))
                     val = "*";
-                out.write("{" + val.getClass().getCanonicalName() + "} <else>" + key + " = ");
+                out.write("{" + val.getClass().getCanonicalName() + "} <else> " + key + " = ");
                 String sVal = "";
                 try {
                     sVal = val.toString();
