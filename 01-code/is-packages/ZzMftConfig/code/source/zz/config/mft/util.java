@@ -89,6 +89,37 @@ public final class util
 
 
 
+	public static final void mapStringToLong (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(mapStringToLong)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:optional sLong
+		// [o] object:0:optional jLong
+		String sLong = null;
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+			boolean	fieldExists = pipelineCursor.first( "sLong" );
+		pipelineCursor.destroy();
+		
+		if (fieldExists){
+			sLong = (String) pipelineCursor.getValue();
+			java.lang.Long jLong = null;
+			if ( null != sLong){
+				jLong = Long.parseLong(sLong);
+			}
+			// pipeline
+			IDataCursor pipelineCursor_1 = pipeline.getCursor();
+			IDataUtil.put( pipelineCursor_1, "jLong", jLong );
+			pipelineCursor_1.destroy();
+		}
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void readFileAsBytes (IData pipeline)
         throws ServiceException
 	{
