@@ -1,3 +1,114 @@
 {
-  "key": "value"
+  "declareMftCertificateList" : [ {
+    "certificateId" : "sshKeyRsaExample1",
+    "certificateAlias" : "sshKeyRsaExample",
+    "description" : "sshKeyRsaExample Description. For Certificates, IDs may also be specified when creating",
+    "location" : "File",
+    "type" : "SSH_PrivateKey",
+    "keyPassword" : "N0t-Manag3",
+    "path" : "/mnt/injected/certs/manual/server/Key1/TestFixtureKey_RSA.OpenSSH.private.txt",
+    "enabled" : "true"
+  }, {
+    "certificateId" : "sshKeyDsaExample1",
+    "certificateAlias" : "sshKeyDsaExample",
+    "description" : "sshKeyDsaExample Description. For Certificates, IDs may also be specified when creating",
+    "location" : "File",
+    "type" : "SSH_PrivateKey",
+    "keyPassword" : "N0t-Manag3",
+    "path" : "/mnt/injected/certs/manual/server/Key1/TestFixtureKey_D25519.OpenSSH.private.txt",
+    "enabled" : "true"
+  }, {
+    "certificateId" : "JksExample1",
+    "certificateAlias" : "JksExample",
+    "description" : "JKS Keystore with Chain Example",
+    "location" : "File",
+    "type" : "Keystore",
+    "keyPassword" : "$om3-secret-string",
+    "keyStorePassword" : "$om3-secret-string",
+    "path" : "/mnt/injected/certs/02-mft-server/out/ed25519/full.chain.key.store.jks",
+    "enabled" : "true"
+  }, {
+    "certificateId" : "TruststoreExample1",
+    "certificateAlias" : "truststoreExample",
+    "description" : "JKS TrustStore",
+    "location" : "File",
+    "type" : "Truststore",
+    "keyPassword" : "cHang3me",
+    "keyStorePassword" : "cHang3me",
+    "path" : "/mnt/injected/certs/out/global.public.trust.store.jks",
+    "enabled" : "true"
+  } ],
+  "declarePortInfoList" : [ {
+    "portName" : "SFTP1",
+    "host" : "0.0.0.0",
+    "port" : "55022",
+    "protocol" : "SFTP",
+    "active" : "true",
+    "sftpDetails" : {
+      "enableDSA" : "true",
+      "DSACertificateId" : "sshKeyDsaExample1",
+      "enableRSA" : "true",
+      "RSACertificateId" : "sshKeyRsaExample1",
+      "requirePassword" : "true",
+      "requirePublicKey" : "false"
+    }
+  }, {
+    "portName" : "SFTP2",
+    "host" : "0.0.0.0",
+    "port" : "55122",
+    "protocol" : "SFTP",
+    "active" : "true",
+    "sftpDetails" : {
+      "enableDSA" : "true",
+      "DSACertificateId" : "sshKeyDsaExample1",
+      "enableRSA" : "true",
+      "RSACertificateId" : "sshKeyRsaExample1",
+      "requirePassword" : "false",
+      "requirePublicKey" : "true"
+    }
+  }, {
+    "portName" : "HTTPS1",
+    "host" : "0.0.0.0",
+    "port" : "55043",
+    "protocol" : "HTTPS",
+    "active" : "true",
+    "httpDetails" : {
+      "httpsDetails" : {
+        "keystoreCertificateId" : "JksExample1",
+        "truststoreCertificateId" : "TruststoreExample1",
+        "sslVersions" : "TLSv1.2"
+      }
+    }
+  } ],
+  "declareGateways" : [ {
+    "instanceName" : "GatewayInstanceNameHere",
+    "host" : "gateway.fqdn",
+    "port" : "55111",
+    "active" : false,
+    "autoConnect" : false,
+    "antiVirusDetails" : {
+      "isActive" : false,
+      "isSSL" : false
+    }
+  } ],
+  "declareVfs" : [ {
+    "declaredVfsDetails" : {
+      "vfsName" : "DefaultVfs",
+      "vfsType" : "Local",
+      "vfsLocation" : {
+        "localPath" : {
+          "filePath" : "/mnt/default-vfs"
+        }
+      },
+      "Encryption" : {
+        "isEncryptionEnabled" : "false",
+        "isDecryptionEnabled" : "false"
+      }
+    },
+    "declaredPartnerInfo" : {
+      "name" : "PlenitudeInternal",
+      "isTNPartner" : "false",
+      "isEnterprise" : "true"
+    }
+  } ]
 }

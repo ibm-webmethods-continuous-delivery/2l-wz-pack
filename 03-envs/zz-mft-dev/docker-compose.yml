@@ -100,6 +100,7 @@ services:
       - ../../01-code/is-packages/ZzMftConfig/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfig/
       - ../../01-code/is-packages/ZzMftConfigLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/ZzMftConfigLocalTest/
       - logs:${WZP_GUEST_LOGS_FOLDER}
+      - mft-default-vfs:/mnt/default-vfs
     environment:
       # TODO: check SAG_ variable names after IBM's acquisition
       # - SAG_IS_LICENSE_FILE=${WZP_GUEST_MOUNT_POINT_LICENSE_FILE}
@@ -107,12 +108,13 @@ services:
       - ZZ_MFT_CONFIG_INJECTED_CERT_PATH=${WZP_GUEST_INJECTED_CERTS_MOUNT_POINT}
       - ZZ_MFT_CONFIG_INJECTED_CONFIG_PATH=${WZP_GUEST_INJECTED_CONFIG_MOUNT_POINT}
       - IS_ADMIN_PWD
-      - WZP_WM_DB_NAME
-      - WZP_WM_DB_USER_NAME
-      - WZP_WM_DB_USER_PASS
+      - WZP_MFT_STARTUP_CONFIG_JSON_FILE
       - WZP_WM_ARCHIVE_DB_NAME
       - WZP_WM_ARCHIVE_DB_USER_NAME
       - WZP_WM_ARCHIVE_DB_USER_PASS
+      - WZP_WM_DB_NAME
+      - WZP_WM_DB_USER_NAME
+      - WZP_WM_DB_USER_PASS
     env_file:
       - ./mft.env
     ports:
@@ -138,6 +140,8 @@ volumes:
     name: zz-mft-dev-cert-manager-home
   cert-manager-tmp:
     name: zz-mft-dev-cert-manager-tmp
+  mft-default-vfs:
+    name: zz-mft-dev-mft-default-vfs
 
 networks:
   n1:
