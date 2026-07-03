@@ -48,7 +48,7 @@ public final class j
 		// pipeline
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		IDataUtil.put( pipelineCursor, "traceText", traceText);
-		pipelineCursor.destroy();			
+		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
                 
@@ -182,7 +182,7 @@ public final class j
 					if (key.equalsIgnoreCase("password"))
 						oa[k] = "*";
 					if(null == oa[k]){
-						out.write("(null)[" + k +"]");
+						out.write("[" + k +"](null)");
 					}else{
 						out.write("{" + oa[k].getClass().getCanonicalName()
 								+ "}[" + k + "] = "
@@ -206,6 +206,7 @@ public final class j
 	
 	private static final String INDENT_SPACE = "+ ";
 	
+		
 		
 	// --- <<IS-END-SHARED>> ---
 }

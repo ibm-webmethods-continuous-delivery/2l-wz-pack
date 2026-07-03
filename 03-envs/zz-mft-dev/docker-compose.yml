@@ -115,6 +115,7 @@ services:
       - WZP_WM_DB_NAME
       - WZP_WM_DB_USER_NAME
       - WZP_WM_DB_USER_PASS
+      - MFT_ADMIN_PASSWORD=a-tG6DzhKHXd6Jt!wFj=kLusfJkx9T5
     env_file:
       - ./mft.env
     ports:
