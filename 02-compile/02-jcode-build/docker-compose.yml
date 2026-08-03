@@ -1,6 +1,13 @@
 services:
   msr:
-    image: ${WZP_MSR_CONTAINER_IMAGE}:${WZP_MSR_CONTAINER_TAG}
+    build:
+      context: .
+      args:
+        __wzp_compiler_image: ${WZP_MSR_IMAGE}
+        __wzp_wm_home: ${WZP_WM_HOME}
+        __wzp_local_uid: ${WZP_LOCAL_UID:-1001}
+        __wzp_local_gid: ${WZP_LOCAL_GID:-1001}
+    platform: linux/amd64
     hostname: wzp-jcode
     volumes:
       # Our Code
@@ -24,8 +31,6 @@ services:
       - ../../01-code/is-packages/WzTestManager/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManager/
       - ../../01-code/is-packages/WzTestManagerManualTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTestManagerManualTest/
       - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
-      - ../../01-code/is-packages/WzTMocks/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocks/
-      - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
       - ../../01-code/is-packages/WzTMocksLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTMocksLocalTest/
       - ../../01-code/is-packages/WzTTools/:${WZP_GUEST_PACKAGES_FOLDER}/WzTTools/
       - ../../01-code/is-packages/WzTToolsLocalTest/:${WZP_GUEST_PACKAGES_FOLDER}/WzTToolsLocalTest/

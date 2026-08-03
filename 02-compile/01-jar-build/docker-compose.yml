@@ -1,0 +1,16 @@
+services:
+  jarbuilder:
+    build:
+      context: .
+      args:
+        __wzp_compiler_image: ${WZP_MSR_IMAGE}
+        __wzp_wm_home: ${WZP_WM_HOME}
+        __wzp_local_uid: ${WZP_LOCAL_UID:-1001}
+        __wzp_local_gid: ${WZP_LOCAL_GID:-1001}
+    platform: linux/amd64
+    volumes:
+      # Java source modules
+      - ../../01-code/java/2l-wz-pipelinelogger/:/workspace/01-code/java/2l-wz-pipelinelogger/
+      - ../../01-code/java/2l-zz-shaman/:/workspace/01-code/java/2l-zz-shaman/
+      # IS packages (so Maven antrun can copy the built JARs into the static folder)
+      - ../../01-code/is-packages/:/workspace/01-code/is-packages/
