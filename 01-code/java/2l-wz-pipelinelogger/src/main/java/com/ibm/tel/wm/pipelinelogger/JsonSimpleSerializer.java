@@ -17,12 +17,21 @@ public class JsonSimpleSerializer implements PipelineSerializer {
 
     @Override
     public String serialize(String serviceNS, long duration, IData inboundPipeline, IData outboundPipeline) {
+        return serialize(serviceNS, duration, inboundPipeline, outboundPipeline, null);
+    }
+
+    @Override
+    public String serialize(String serviceNS, long duration, IData inboundPipeline,
+                            IData outboundPipeline, Throwable thrown) {
         try {
             ObjectNode root = mapper.createObjectNode();
             root.put("service", serviceNS);
             root.put("durationMillis", duration);
             root.set("inputPipeline", serializeIDataSimple(inboundPipeline));
             root.set("outputPipeline", serializeIDataSimple(outboundPipeline));
+            if (thrown != null) {
+                root.set("exception", serializeException(thrown));
+            }
             return mapper.writeValueAsString(root);
         } catch (Exception e) {
             return "{\"error\":\"Failed to serialize pipeline: " + e.getMessage() + "\"}";
@@ -32,6 +41,19 @@ public class JsonSimpleSerializer implements PipelineSerializer {
     @Override
     public boolean isEnabled() {
         return Config.INSTANCE.isJsonSimpleSerializerEnabled();
+    }
+
+    private ObjectNode serializeException(Throwable thrown) {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("type", thrown.getClass().getName());
+        node.put("message", thrown.getMessage());
+        if (thrown.getCause() != null) {
+            node.set("cause", serializeException(thrown.getCause()));
+        }
+        java.io.StringWriter sw = new java.io.StringWriter();
+        thrown.printStackTrace(new java.io.PrintWriter(sw));
+        node.put("stackTrace", sw.toString());
+        return node;
     }
 
     /**

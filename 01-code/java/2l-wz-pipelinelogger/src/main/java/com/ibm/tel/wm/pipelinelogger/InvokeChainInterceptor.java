@@ -61,10 +61,13 @@ public class InvokeChainInterceptor implements InvokeChainProcessor {
                 "Pipeline Logger ERROR caught: " + t.getMessage());
         }
 
+        Throwable serviceException = null;
         try {
             if (chain.hasNext()) {
                 ((InvokeChainProcessor) chain.next()).process(chain, svc, pipeline, status);
             }
+        } catch (Throwable t) {
+            serviceException = t;
         } finally {
             long duration = System.currentTimeMillis() - startTime;
 
@@ -72,15 +75,28 @@ public class InvokeChainInterceptor implements InvokeChainProcessor {
             for (PipelineSerializer serializer : serializers) {
                 if (serializer.isEnabled()) {
                     try {
-                        String output = serializer.serialize(serviceNS, duration, inboundPipeline, pipeline);
+                        String output = (serviceException == null)
+                            ? serializer.serialize(serviceNS, duration, inboundPipeline, pipeline)
+                            : serializer.serialize(serviceNS, duration, inboundPipeline, pipeline, serviceException);
                         JournalLogger.logInfo(JournalLogger.LOG_EXCEPTION, JournalLogger.FAC_LICENSE_MGR, output);
                     } catch (Throwable t) {
                         JournalLogger.logError(JournalLogger.LOG_MSG, JournalLogger.FAC_LICENSE_MGR,
                             "Error in serializer " + serializer.getClass().getSimpleName() + ": " + t.getMessage());
-                            t.printStackTrace();
+                        t.printStackTrace();
                     }
                 }
             }
+        }
+
+        // Re-throw the original exception unchanged so upstream error handling is unaffected
+        if (serviceException instanceof ServerException) {
+            throw (ServerException) serviceException;
+        } else if (serviceException instanceof RuntimeException) {
+            throw (RuntimeException) serviceException;
+        } else if (serviceException instanceof Error) {
+            throw (Error) serviceException;
+        } else if (serviceException != null) {
+            throw new ServerException(serviceException);
         }
     }
 }

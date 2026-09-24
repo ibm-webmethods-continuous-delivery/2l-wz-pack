@@ -21,6 +21,12 @@ public class VerboseSerializer implements PipelineSerializer {
 
     @Override
     public String serialize(String serviceNS, long duration, IData inboundPipeline, IData outboundPipeline) {
+        return serialize(serviceNS, duration, inboundPipeline, outboundPipeline, null);
+    }
+
+    @Override
+    public String serialize(String serviceNS, long duration, IData inboundPipeline,
+                            IData outboundPipeline, Throwable thrown) {
         java.io.StringWriter sw = new java.io.StringWriter();
         sw.write("Service call");
         sw.write("\nService         : " + serviceNS);
@@ -38,6 +44,16 @@ public class VerboseSerializer implements PipelineSerializer {
             c.destroy();
         }
         */
+        if (thrown != null) {
+            sw.write("\n== Exception ====================================");
+            sw.write("\nType    : " + thrown.getClass().getName());
+            sw.write("\nMessage : " + thrown.getMessage());
+            for (Throwable cause = thrown.getCause(); cause != null; cause = cause.getCause()) {
+                sw.write("\nCaused by " + cause.getClass().getName() + ": " + cause.getMessage());
+            }
+            sw.write("\nStack trace:\n");
+            thrown.printStackTrace(new java.io.PrintWriter(sw));
+        }
         return sw.toString();
     }
 
